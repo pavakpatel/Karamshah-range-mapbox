@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Display a map on a webpage</title>
+<title>Missile Range from Kermanshah</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
@@ -70,74 +70,135 @@ const circle4 = turf.circle(center4, radius4, options4);
 
 map.on('load', function(e) {
 	
-map.addSource("circleData", {
-	type: "geojson",
-	data: circle
-});
-	
-	map.addSource("circleData2", {
-	type: "geojson",
-	data: circle2
-});
-	
-	map.addSource("circleData3", {
-	type: "geojson",
-	data: circle3
-});
-	
-	map.addSource("circleData4", {
-	type: "geojson",
-	data: circle4
-});
+	map.addSource("circleData", {
+		type: "geojson",
+		data: circle
+	});
+		
+		map.addSource("circleData2", {
+		type: "geojson",
+		data: circle2
+	});
+		
+		map.addSource("circleData3", {
+		type: "geojson",
+		data: circle3
+	});
+		
+		map.addSource("circleData4", {
+		type: "geojson",
+		data: circle4
+	});
 
-map.addLayer({
-	id: "circle-fill",
-	type: "fill",
-	source: "circleData",
-	paint: {
-		"fill-color": "yellow",
-		"fill-opacity": 0.6
-	}
-});
-	
 	map.addLayer({
-	id: "circle-fill2",
-	type: "fill",
-	source: "circleData2",
-	paint: {
-		"fill-color": "red",
-		"fill-opacity": 0.5
-	}
-});
-	
-	map.addLayer({
-	id: "circle-fill3",
-	type: "fill",
-	source: "circleData3",
-	paint: {
-		"fill-color": "green",
-		"fill-opacity": 0.4
-	}
-});
-	
-	map.addLayer({
-	id: "circle-fill4",
-	type: "fill",
-	source: "circleData4",
-	paint: {
-		"fill-color": "white",
-		"fill-opacity": 0.3
-	}
-});
+		id: "circle-fill",
+		type: "fill",
+		source: "circleData",
+		paint: {
+			"fill-color": "yellow",
+			"fill-opacity": 0.6
+		}
 
-});
+	});
+		
+		map.addLayer({
+		id: "circle-fill2",
+		type: "fill",
+		source: "circleData2",
+		paint: {
+			"fill-color": "red",
+			"fill-opacity": 0.5
+		}
+	});
+		
+		map.addLayer({
+		id: "circle-fill3",
+		type: "fill",
+		source: "circleData3",
+		paint: {
+			"fill-color": "green",
+			"fill-opacity": 0.4
+		}
+	});
+		
+		map.addLayer({
+		id: "circle-fill4",
+		type: "fill",
+		source: "circleData4",
+		paint: {
+			"fill-color": "white",
+			"fill-opacity": 0.3
+		}
+	});
 
-// Add marker
-let marker = new mapboxgl.Marker({
-	draggable: true
-})
-	.setLngLat([LONG, LAT])
-	.addTo(map);
+	const popup = new mapboxgl.Popup({
+		closeButton: false,
+		closeOnClick: false
+	});
+
+	//Popup on Click
+	//map.on("click","circle-fill", (e) => {
+	//	const circlett = e.features[0];
+	//		popup.setHTML('<b>300 KM</b>')
+	//		popup.setLngLat([LONG, LAT])
+	//		popup.addTo(map);
+	//	});
+
+		//Popup on Hover
+		map.on("mouseenter", "circle-fill", () => {
+			map.getCanvas().style.cursor = "pointer";
+			popup.setHTML('<b>300 KM</b>')
+			popup.setLngLat([LONG, LAT])
+			popup.addTo(map);
+		});
+
+		map.on("mouseleave","circle-fill", () => {
+			map.getCanvas().style.cursor = ""
+			popup.remove();
+		});
+
+		map.on("mouseenter", "circle-fill2", () => {
+			map.getCanvas().style.cursor = "pointer";
+			popup.setHTML('<b>500 KM</b>')
+			popup.setLngLat([LONG, LAT])
+			popup.addTo(map);
+		});
+
+		map.on("mouseleave","circle-fill2", () => {
+			map.getCanvas().style.cursor = ""
+			popup.remove();
+		});
+
+		map.on("mouseenter", "circle-fill3", () => {
+			map.getCanvas().style.cursor = "pointer";
+			popup.setHTML('<b>1000 KM</b>')
+			popup.setLngLat([LONG, LAT])
+			popup.addTo(map);
+		});
+
+		map.on("mouseleave","circle-fill3", () => {
+			map.getCanvas().style.cursor = ""
+			popup.remove();
+		});
+
+		map.on("mouseenter", "circle-fill4", () => {
+			map.getCanvas().style.cursor = "pointer";
+			popup.setHTML('<b>2000 KM</b>')
+			popup.setLngLat([LONG, LAT])
+			popup.addTo(map);
+		});
+
+		map.on("mouseleave","circle-fill4", () => {
+			map.getCanvas().style.cursor = ""
+			popup.remove();
+		});
+	});
+	// Add marker
+	let marker = new mapboxgl.Marker({
+		draggable: true
+		})
+		.setLngLat([LONG, LAT])
+		.addTo(map);
 
 
 
